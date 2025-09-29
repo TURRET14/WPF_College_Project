@@ -1,0 +1,29 @@
+﻿<Page x:Class="_222_Emelyanenko.RegisterPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:_222_Emelyanenko"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Зарегистрироваться">
+
+    <Grid VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition Height="45"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Column="0" Grid.Row="0">Логин</Label>
+        <TextBox Grid.Column="1" Grid.Row="0" Name="Login_Input"></TextBox>
+
+        <Label Grid.Column="0" Grid.Row="1">Пароль</Label>
+        <TextBox Grid.Column="1" Grid.Row="1" Name="Password_Input"></TextBox>
+        <Button Grid.Row="2" Grid.ColumnSpan="2" Click="RegisterButton_Click">Зарегистрироваться</Button>
+    </Grid>
+</Page>
