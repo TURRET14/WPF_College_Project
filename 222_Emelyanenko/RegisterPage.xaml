@@ -13,6 +13,9 @@
             <RowDefinition Height="45"></RowDefinition>
             <RowDefinition Height="45"></RowDefinition>
             <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition Height="45"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -24,6 +27,19 @@
 
         <Label Grid.Column="0" Grid.Row="1">Пароль</Label>
         <TextBox Grid.Column="1" Grid.Row="1" Name="Password_Input"></TextBox>
-        <Button Grid.Row="2" Grid.ColumnSpan="2" Click="RegisterButton_Click">Зарегистрироваться</Button>
+
+        <Label Grid.Column="0" Grid.Row="2">Повторите пароль</Label>
+        <TextBox Grid.Column="1" Grid.Row="2" Name="PasswordRepeat_Input"></TextBox>
+
+        <Label Grid.Column="0" Grid.Row="3">ФИО</Label>
+        <TextBox Grid.Column="1" Grid.Row="3" Name="FIO_Input"></TextBox>
+
+        <Label Grid.Column="0" Grid.Row="4">Роль</Label>
+        <ComboBox Grid.Column="1" Grid.Row="4" Name="Role_Input" SelectedIndex="0">
+            <ComboBoxItem>User</ComboBoxItem>
+            <ComboBoxItem>Admin</ComboBoxItem>
+        </ComboBox>
+
+        <Button Grid.Row="5" Grid.ColumnSpan="2" Click="RegisterButton_Click">Зарегистрироваться</Button>
     </Grid>
 </Page>

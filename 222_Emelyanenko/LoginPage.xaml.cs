@@ -23,6 +23,7 @@ namespace _222_Emelyanenko
     {
         private int failedAttempts = 0;
         private User currentUser;
+        private bool isCaptchaVisible = false;
         public LoginPage()
         {
             InitializeComponent();
@@ -34,46 +35,126 @@ namespace _222_Emelyanenko
             return string.Concat(hash.ComputeHash(Encoding.UTF8.GetBytes(password)).Select(x => x.ToString("X2")));
         }
 
-        private void Login_Click(object sender, RoutedEventArgs e)
+        private void ToggleCaptcha()
         {
-            if (Login_Input.Text.Length == 0)
+            if (isCaptchaVisible)
             {
-                MessageBox.Show("Введите логин!");
-                return;
-            }
-            else if (Password_Input.Text.Length == 0)
-            {
-                MessageBox.Show("Введите пароль!");
-                return;
+                CaptchaLabel.Visibility = Visibility.Collapsed;
+                CaptchaText.Visibility = Visibility.Collapsed;
+                CaptchaGrid.Visibility = Visibility.Collapsed;
+                
+                failedAttempts = 0;
+                CaptchaText.Text = "";
+                CaptchaInput.Text = "";
             }
             else
             {
-                string login = Login_Input.Text;
-                string password = GetHash(Password_Input.Text);
-                currentUser = Emelyanenko_DB_PaymentEntities1.getInstance().User.AsNoTracking().FirstOrDefault(user => user.Login == login && user.Password == password);
-                if (currentUser == null)
-                {
-                    MessageBox.Show("Логин или пароль неверны!");
-                    failedAttempts++;
-                    if (failedAttempts >= 3)
-                    {
+                CaptchaLabel.Visibility = Visibility.Visible;
+                CaptchaText.Visibility = Visibility.Visible;
+                CaptchaGrid.Visibility = Visibility.Visible;
+                
+                CaptchaText.Text = "";
+                CaptchaInput.Text = "";
+                CaptchaText.Text = GenerateCaptcha();
+            }
 
-                    }
+            isCaptchaVisible = !isCaptchaVisible;
+        }
+
+        private string GenerateCaptcha()
+        {
+            StringBuilder captcha = new StringBuilder();
+            Random random = new Random();
+            for (int count = 0; count < 10; count++)
+            {
+                int type = random.Next(1, 4);
+                int generatedNumber = 0;
+                switch (type)
+                {
+                    case 1:
+                        generatedNumber = random.Next(48, 58);
+                        captcha.Append((char)generatedNumber);
+                        break;
+                    case 2:
+                        generatedNumber = random.Next(65, 91);
+                        captcha.Append((char)generatedNumber);
+                        break;
+                    case 3:
+                        generatedNumber = random.Next(97, 123);
+                        captcha.Append((char)generatedNumber);
+                        break;
+                }
+            }
+            return captcha.ToString();
+        }
+
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+            if (isCaptchaVisible)
+            {
+                MessageBox.Show("Введите и проверьте Captcha!");
+                return;
+            }
+            if (Login_Input.Text.Length == 0)
+                {
+                    MessageBox.Show("Введите логин!");
+                    return;
+                }
+                else if (Password_Input.Text.Length == 0)
+                {
+                    MessageBox.Show("Введите пароль!");
+                    return;
                 }
                 else
                 {
-                    switch (currentUser.Role)
+                    string login = Login_Input.Text;
+                    string password = GetHash(Password_Input.Text);
+                    currentUser = Emelyanenko_DB_PaymentEntities1.getInstance().User.AsNoTracking().FirstOrDefault(user => user.Login == login && user.Password == password);
+                    if (currentUser == null)
                     {
-                        case "User":
+                        MessageBox.Show("Логин или пароль неверны!");
+                        failedAttempts++;
+                        if (failedAttempts >= 3)
+                        {
+                            ToggleCaptcha();
+                        }
+                    }
+                    else
+                    {
+                        switch (currentUser.Role)
+                        {
+                            case "User":
 
-                            break;
-                        case "Admin":
+                                break;
+                            case "Admin":
 
-                            break;
+                                break;
+                        }
                     }
                 }
-            }
 
+        }
+
+        private void CaptchaText_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Command == ApplicationCommands.Copy || e.Command == ApplicationCommands.Cut || e.Command == ApplicationCommands.Paste)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void CaptchaValidate_Click(object sender, RoutedEventArgs e)
+        {
+            if (CaptchaInput.Text == CaptchaText.Text)
+            {
+                ToggleCaptcha();
+            }
+            else
+            {
+                MessageBox.Show("Неверная Captcha. Попробуйте снова!");
+                isCaptchaVisible = false;
+                ToggleCaptcha();
+            }
         }
     }
 }
