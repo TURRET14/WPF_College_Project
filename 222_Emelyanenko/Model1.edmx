@@ -9,33 +9,33 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Num" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="UserID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Login" Type="varchar(max)" Nullable="false" />
           <Property Name="Password" Type="varchar(max)" Nullable="false" />
           <Property Name="Role" Type="varchar" MaxLength="50" />
           <Property Name="FIO" Type="varchar(max)" />
           <Property Name="Photo" Type="nvarchar(max)" />
         </EntityType>
-        <Association Name="FK__Payment__Categor__60A75C0F">
+        <Association Name="FK__Payment__Categor__4F7CD00D">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
           <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -47,7 +47,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Payment__UserID__628FA481">
+        <Association Name="FK__Payment__UserID__4E88ABD4">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -63,11 +63,11 @@
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Payment__Categor__60A75C0F" Association="Self.FK__Payment__Categor__60A75C0F">
+          <AssociationSet Name="FK__Payment__Categor__4F7CD00D" Association="Self.FK__Payment__Categor__4F7CD00D">
             <End Role="Category" EntitySet="Category" />
             <End Role="Payment" EntitySet="Payment" />
           </AssociationSet>
-          <AssociationSet Name="FK__Payment__UserID__628FA481" Association="Self.FK__Payment__UserID__628FA481">
+          <AssociationSet Name="FK__Payment__UserID__4E88ABD4" Association="Self.FK__Payment__UserID__4E88ABD4">
             <End Role="User" EntitySet="User" />
             <End Role="Payment" EntitySet="Payment" />
           </AssociationSet>
@@ -81,37 +81,37 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Payment" Relationship="Self.FK__Payment__Categor__60A75C0F" FromRole="Category" ToRole="Payment" />
+          <NavigationProperty Name="Payment" Relationship="Self.FK__Payment__Categor__4F7CD00D" FromRole="Category" ToRole="Payment" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="CategoryID" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Num" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Category" Relationship="Self.FK__Payment__Categor__60A75C0F" FromRole="Payment" ToRole="Category" />
-          <NavigationProperty Name="User" Relationship="Self.FK__Payment__UserID__628FA481" FromRole="Payment" ToRole="User" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Payment__Categor__4F7CD00D" FromRole="Payment" ToRole="Category" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Payment__UserID__4E88ABD4" FromRole="Payment" ToRole="User" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FIO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Payment" Relationship="Self.FK__Payment__UserID__628FA481" FromRole="User" ToRole="Payment" />
+          <NavigationProperty Name="Payment" Relationship="Self.FK__Payment__UserID__4E88ABD4" FromRole="User" ToRole="Payment" />
         </EntityType>
-        <Association Name="FK__Payment__Categor__60A75C0F">
+        <Association Name="FK__Payment__Categor__4F7CD00D">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
           <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -123,7 +123,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Payment__UserID__628FA481">
+        <Association Name="FK__Payment__UserID__4E88ABD4">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -135,15 +135,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Emelyanenko_DB_PaymentEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Emelyanenko_DB_PaymentEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Category" EntityType="Self.Category" />
           <EntitySet Name="Payment" EntityType="Self.Payment" />
           <EntitySet Name="User" EntityType="Self.User" />
-          <AssociationSet Name="FK__Payment__Categor__60A75C0F" Association="Self.FK__Payment__Categor__60A75C0F">
+          <AssociationSet Name="FK__Payment__Categor__4F7CD00D" Association="Self.FK__Payment__Categor__4F7CD00D">
             <End Role="Category" EntitySet="Category" />
             <End Role="Payment" EntitySet="Payment" />
           </AssociationSet>
-          <AssociationSet Name="FK__Payment__UserID__628FA481" Association="Self.FK__Payment__UserID__628FA481">
+          <AssociationSet Name="FK__Payment__UserID__4E88ABD4" Association="Self.FK__Payment__UserID__4E88ABD4">
             <End Role="User" EntitySet="User" />
             <End Role="Payment" EntitySet="Payment" />
           </AssociationSet>
@@ -153,7 +153,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище Emelyanenko_DB_PaymentModelContainer" CdmEntityContainer="Emelyanenko_DB_PaymentEntities1">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Emelyanenko_DB_PaymentModelContainer" CdmEntityContainer="Emelyanenko_DB_PaymentEntities2">
           <EntitySetMapping Name="Category">
             <EntityTypeMapping TypeName="Emelyanenko_DB_PaymentModel.Category">
               <MappingFragment StoreEntitySet="Category">
@@ -166,12 +166,12 @@
             <EntityTypeMapping TypeName="Emelyanenko_DB_PaymentModel.Payment">
               <MappingFragment StoreEntitySet="Payment">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Num" ColumnName="Num" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

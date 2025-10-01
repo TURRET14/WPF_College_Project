@@ -109,7 +109,7 @@ namespace _222_Emelyanenko
                 {
                     string login = Login_Input.Text;
                     string password = GetHash(Password_Input.Text);
-                    currentUser = Emelyanenko_DB_PaymentEntities1.getInstance().User.AsNoTracking().FirstOrDefault(user => user.Login == login && user.Password == password);
+                    currentUser = Emelyanenko_DB_PaymentEntities2.getInstance().User.AsNoTracking().FirstOrDefault(user => user.Login == login && user.Password == password);
                     if (currentUser == null)
                     {
                         MessageBox.Show("Логин или пароль неверны!");
@@ -127,7 +127,7 @@ namespace _222_Emelyanenko
 
                                 break;
                             case "Admin":
-
+                            NavigationService.Navigate(new UsersPage());
                                 break;
                         }
                     }

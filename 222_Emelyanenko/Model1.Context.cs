@@ -13,19 +13,20 @@ namespace _222_Emelyanenko
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Emelyanenko_DB_PaymentEntities1 : DbContext
+    public partial class Emelyanenko_DB_PaymentEntities2 : DbContext
     {
-        private Emelyanenko_DB_PaymentEntities1()
-            : base("name=Emelyanenko_DB_PaymentEntities1")
+        public Emelyanenko_DB_PaymentEntities2()
+            : base("name=Emelyanenko_DB_PaymentEntities2")
         {
         }
 
-        static private Emelyanenko_DB_PaymentEntities1 instance;
-        static public Emelyanenko_DB_PaymentEntities1 getInstance()
+        private static Emelyanenko_DB_PaymentEntities2 instance;
+
+        public static Emelyanenko_DB_PaymentEntities2 getInstance()
         {
             if (instance == null)
             {
-                instance = new Emelyanenko_DB_PaymentEntities1();
+                instance = new Emelyanenko_DB_PaymentEntities2();
             }
             return instance;
         }
