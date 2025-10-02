@@ -28,8 +28,8 @@ namespace _222_Emelyanenko
             InitializeComponent();
             Emelyanenko_DB_PaymentEntities2.getInstance().User.Load();
             users = Emelyanenko_DB_PaymentEntities2.getInstance().User.Local.ToList();
-            users.Sort((user1, user2) => user1.FIO.CompareTo(user2.FIO));
             UsersView.ItemsSource = users;
+            sortByFIO();
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
@@ -45,33 +45,26 @@ namespace _222_Emelyanenko
             }
             else
             {
-                UsersView.ItemsSource = users.Where(user => user.FIO.Contains(FIO_Input.Text));
+                UsersView.ItemsSource = users.Where(user => user.FIO.Contains(FIO_Input.Text)).ToList();
             }
 
             if (Admin_CheckBox.IsChecked.Value)
             {
-                UsersView.ItemsSource = ((List<User>)(UsersView.ItemsSource)).Where(user => user.Role == "Admin");
+                UsersView.ItemsSource = ((List<User>)(UsersView.ItemsSource)).Where(user => user.Role == "Admin").ToList();
             }
 
-            if (SortComboBox.Text == "ФИО, По убыванию")
-            {
-                ((List<User>)UsersView.ItemsSource).Reverse();
-            }
-
+            sortByFIO();
         }
 
         private void Admin_CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            UsersView.ItemsSource = users.Where(user => user.Role == "Admin");
+            UsersView.ItemsSource = users.Where(user => user.Role == "Admin").ToList();
             if (FIO_Input.Text.Length > 0)
             {
-                UsersView.ItemsSource = ((List<User>)(UsersView.ItemsSource)).Where(user => user.FIO.Contains(FIO_Input.Text));
+                UsersView.ItemsSource = ((List<User>)(UsersView.ItemsSource)).Where(user => user.FIO.Contains(FIO_Input.Text)).ToList();
             }
 
-            if (SortComboBox.Text == "ФИО, По убыванию")
-            {
-                ((List<User>)UsersView.ItemsSource).Reverse();
-            }
+            sortByFIO();
         }
 
         private void Admin_CheckBox_Unchecked(object sender, RoutedEventArgs e)
@@ -79,13 +72,10 @@ namespace _222_Emelyanenko
             UsersView.ItemsSource = users;
             if (FIO_Input.Text.Length > 0)
             {
-                UsersView.ItemsSource = ((List<User>)(UsersView.ItemsSource)).Where(user => user.FIO.Contains(FIO_Input.Text));
+                UsersView.ItemsSource = ((List<User>)(UsersView.ItemsSource)).Where(user => user.FIO.Contains(FIO_Input.Text)).ToList();
             }
 
-            if (SortComboBox.Text == "ФИО, По убыванию")
-            {
-                ((List<User>)UsersView.ItemsSource).Reverse();
-            }
+            sortByFIO();
         }
 
         private void ClearFilters_Button_Click(object sender, RoutedEventArgs e)
@@ -96,7 +86,26 @@ namespace _222_Emelyanenko
 
         private void SortComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ((List<User>)UsersView.ItemsSource).Reverse();
+            sortByFIO();
+        }
+
+        private void sortByFIO()
+        {
+            if (UsersView != null)
+            {
+                List<User> sortedCollection = (List<User>)UsersView.ItemsSource;
+                if (((ComboBoxItem)SortComboBox.SelectedItem).Content as string == "ФИО, По убыванию")
+                {
+                    sortedCollection.Sort((user1, user2) => user1.FIO.CompareTo(user2.FIO));
+                    sortedCollection.Reverse();
+                }
+                else if (((ComboBoxItem)SortComboBox.SelectedItem).Content as string == "ФИО, По возрастанию")
+                {
+                    sortedCollection.Sort((user1, user2) => user1.FIO.CompareTo(user2.FIO));
+                }
+                UsersView.ItemsSource = null;
+                UsersView.ItemsSource = sortedCollection;
+            }
         }
     }
 }
