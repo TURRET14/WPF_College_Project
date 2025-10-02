@@ -23,12 +23,19 @@
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0">ФИО</Label>
             <TextBox Grid.Column="1" Name="FIO_Input" TextChanged="FIO_Input_TextChanged"></TextBox>
             <CheckBox Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Name="Admin_CheckBox" Checked="Admin_CheckBox_Checked" Unchecked="Admin_CheckBox_Unchecked">Только администраторы</CheckBox>
-            <Button Grid.Column="3" Name="ClearFilters_Button" Click="ClearFilters_Button_Click">Очистить фильтры</Button>
+            <Label Grid.Column="3">Сортировка</Label>
+            <ComboBox Grid.Column="4" Name="SortComboBox" SelectedIndex="0" SelectionChanged="SortComboBox_SelectionChanged">
+                <ComboBoxItem>ФИО, По возрастанию</ComboBoxItem>
+                <ComboBoxItem>ФИО, По убыванию</ComboBoxItem>
+            </ComboBox>
+            <Button Grid.Column="5" Name="ClearFilters_Button" Click="ClearFilters_Button_Click">Очистить фильтры</Button>
         </Grid>
         <ListView Grid.Row="2" Name="UsersView">
             <ListView.ItemsPanel>

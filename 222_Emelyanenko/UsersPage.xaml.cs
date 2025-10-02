@@ -22,12 +22,13 @@ namespace _222_Emelyanenko
     /// </summary>
     public partial class UsersPage : Page
     {
-        ObservableCollection<User> users;
+        List<User> users;
         public UsersPage()
         {
             InitializeComponent();
             Emelyanenko_DB_PaymentEntities2.getInstance().User.Load();
-            users = Emelyanenko_DB_PaymentEntities2.getInstance().User.Local;
+            users = Emelyanenko_DB_PaymentEntities2.getInstance().User.Local.ToList();
+            users.Sort((user1, user2) => user1.FIO.CompareTo(user2.FIO));
             UsersView.ItemsSource = users;
         }
 
@@ -49,8 +50,14 @@ namespace _222_Emelyanenko
 
             if (Admin_CheckBox.IsChecked.Value)
             {
-                UsersView.ItemsSource = ((IEnumerable<User>)(UsersView.ItemsSource)).Where(user => user.Role == "Admin");
+                UsersView.ItemsSource = ((List<User>)(UsersView.ItemsSource)).Where(user => user.Role == "Admin");
             }
+
+            if (SortComboBox.Text == "ФИО, По убыванию")
+            {
+                ((List<User>)UsersView.ItemsSource).Reverse();
+            }
+
         }
 
         private void Admin_CheckBox_Checked(object sender, RoutedEventArgs e)
@@ -58,7 +65,12 @@ namespace _222_Emelyanenko
             UsersView.ItemsSource = users.Where(user => user.Role == "Admin");
             if (FIO_Input.Text.Length > 0)
             {
-                UsersView.ItemsSource = ((IEnumerable<User>)(UsersView.ItemsSource)).Where(user => user.FIO.Contains(FIO_Input.Text));
+                UsersView.ItemsSource = ((List<User>)(UsersView.ItemsSource)).Where(user => user.FIO.Contains(FIO_Input.Text));
+            }
+
+            if (SortComboBox.Text == "ФИО, По убыванию")
+            {
+                ((List<User>)UsersView.ItemsSource).Reverse();
             }
         }
 
@@ -67,7 +79,12 @@ namespace _222_Emelyanenko
             UsersView.ItemsSource = users;
             if (FIO_Input.Text.Length > 0)
             {
-                UsersView.ItemsSource = ((IEnumerable<User>)(UsersView.ItemsSource)).Where(user => user.FIO.Contains(FIO_Input.Text));
+                UsersView.ItemsSource = ((List<User>)(UsersView.ItemsSource)).Where(user => user.FIO.Contains(FIO_Input.Text));
+            }
+
+            if (SortComboBox.Text == "ФИО, По убыванию")
+            {
+                ((List<User>)UsersView.ItemsSource).Reverse();
             }
         }
 
@@ -75,6 +92,11 @@ namespace _222_Emelyanenko
         {
             FIO_Input.Text = "";
             Admin_CheckBox.IsChecked = false;
+        }
+
+        private void SortComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ((List<User>)UsersView.ItemsSource).Reverse();
         }
     }
 }
