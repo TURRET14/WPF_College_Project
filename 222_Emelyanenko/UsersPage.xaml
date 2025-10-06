@@ -17,7 +17,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0">Пользователи</Label>
+        <Label Grid.Row="0" FontWeight="Bold">Пользователи</Label>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -32,15 +32,15 @@
             <CheckBox Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Name="Admin_CheckBox" Checked="Admin_CheckBox_Checked" Unchecked="Admin_CheckBox_Unchecked">Только администраторы</CheckBox>
             <Label Grid.Column="3">Сортировка</Label>
             <ComboBox Grid.Column="4" Name="SortComboBox" SelectedIndex="0" SelectionChanged="SortComboBox_SelectionChanged">
-                <ComboBoxItem>ФИО, По возрастанию</ComboBoxItem>
-                <ComboBoxItem>ФИО, По убыванию</ComboBoxItem>
+                <sys:String>ФИО, По возрастанию</sys:String>
+                <sys:String>ФИО, По убыванию</sys:String>
             </ComboBox>
             <Button Grid.Column="5" Name="ClearFilters_Button" Click="ClearFilters_Button_Click">Очистить фильтры</Button>
         </Grid>
-        <ListView Grid.Row="2" Name="UsersView">
+        <ListView Grid.Row="2" Name="UsersView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal">
+                    <WrapPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                     </WrapPanel>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
@@ -52,30 +52,33 @@
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="0" Grid.Column="0">ID</Label>
-                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ID}"></TextBox>
-
+                        <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Stretch="Uniform" Width="50" RenderOptions.BitmapScalingMode="HighQuality">
+                            <Image.Source>
+                                <Binding Path="Photo">
+                                    <Binding.TargetNullValue>
+                                        <ImageSource>/User.png</ImageSource>
+                                    </Binding.TargetNullValue>
+                                </Binding>
+                            </Image.Source>
+                        </Image>
                         <Label Grid.Row="1" Grid.Column="0">Логин</Label>
-                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Login}"></TextBox>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Login}" IsReadOnly="True"></TextBox>
 
-                        <Label Grid.Row="2" Grid.Column="0">Пароль</Label>
-                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Password}"></TextBox>
+                        <Label Grid.Row="2" Grid.Column="0">ФИО</Label>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding FIO}" IsReadOnly="True"></TextBox>
 
-                        <Label Grid.Row="3" Grid.Column="0">ФИО</Label>
-                        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding FIO}"></TextBox>
-
-                        <Label Grid.Row="4" Grid.Column="0">Роль</Label>
-                        <ComboBox Grid.Row="4" Grid.Column="1" SelectedItem="{Binding Role}">
+                        <Label Grid.Row="3" Grid.Column="0">Роль</Label>
+                        <ComboBox Grid.Row="3" Grid.Column="1" SelectedItem="{Binding Role}" IsEditable="False" IsDropDownOpen="False" IsReadOnly="False" IsEnabled="False">
                             <sys:String>User</sys:String>
                             <sys:String>Admin</sys:String>
                         </ComboBox>
+                        
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -20,6 +20,16 @@
         <Setter Property="Foreground" Value="Black"/>
     </Style>
 
+    <Style TargetType="PasswordBox">
+        <Setter Property="Height" Value="35"></Setter>
+        <Setter Property="Padding" Value="8"></Setter>
+        <Setter Property="Margin" Value="5"></Setter>
+        <Setter Property="FontFamily" Value="Bahnschrift"></Setter>
+        <Setter Property="FontSize" Value="12"></Setter>
+        <Setter Property="Background" Value="#D1EEFC"></Setter>
+        <Setter Property="Foreground" Value="Black"/>
+    </Style>
+
     <Style TargetType="TextBlock">
         <Setter Property="Foreground" Value="Black"></Setter>
         <Setter Property="FontFamily" Value="Bahnschrift"/>
@@ -46,5 +56,11 @@
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
         <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+    </Style>
+
+    <Style TargetType="DataGridCell">
+        <Setter Property="Foreground" Value="Black"></Setter>
+        <Setter Property="FontFamily" Value="Bahnschrift"></Setter>
+        <Setter Property="FontSize" Value="12"></Setter>
     </Style>
 </ResourceDictionary>

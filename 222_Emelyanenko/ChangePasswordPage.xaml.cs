@@ -74,24 +74,24 @@ namespace _222_Emelyanenko
                 MessageBox.Show("Введите логин!");
                 return;
             }
-            else if (OldPassword_Input.Text.Length == 0 || NewPassword_Input.Text.Length == 0)
+            else if (OldPassword_Input.Password.Length == 0 || NewPassword_Input.Password.Length == 0)
             {
                 MessageBox.Show("Введите старый и новый пароли!");
                 return;
             }
-            else if (OldPassword_Input.Text == NewPassword_Input.Text)
+            else if (OldPassword_Input.Password == NewPassword_Input.Password)
             {
                 MessageBox.Show("Старый и новый пароль должны различаться!");
             }
             else
             {
-                if (!CheckPassword(NewPassword_Input.Text))
+                if (!CheckPassword(NewPassword_Input.Password))
                 {
                     return;
                 }
                 string login = Login_Input.Text;
-                string oldPassword = GetHash(OldPassword_Input.Text);
-                string newPassword = GetHash(NewPassword_Input.Text);
+                string oldPassword = GetHash(OldPassword_Input.Password);
+                string newPassword = GetHash(NewPassword_Input.Password);
                 currentUser = Emelyanenko_DB_PaymentEntities2.getInstance().User.FirstOrDefault(user => user.Login == login && user.Password == oldPassword);
                 if (currentUser == null)
                 {

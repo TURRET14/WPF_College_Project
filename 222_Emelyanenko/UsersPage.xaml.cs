@@ -26,10 +26,9 @@ namespace _222_Emelyanenko
         public UsersPage()
         {
             InitializeComponent();
-            Emelyanenko_DB_PaymentEntities2.getInstance().User.Load();
-            users = Emelyanenko_DB_PaymentEntities2.getInstance().User.Local.ToList();
+            users = Emelyanenko_DB_PaymentEntities2.getInstance().User.ToList();
             UsersView.ItemsSource = users;
-            sortByFIO();
+            Sort();
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
@@ -39,43 +38,17 @@ namespace _222_Emelyanenko
 
         private void FIO_Input_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (FIO_Input.Text.Length == 0)
-            {
-                UsersView.ItemsSource = users;
-            }
-            else
-            {
-                UsersView.ItemsSource = users.Where(user => user.FIO.Contains(FIO_Input.Text)).ToList();
-            }
-
-            if (Admin_CheckBox.IsChecked.Value)
-            {
-                UsersView.ItemsSource = ((List<User>)(UsersView.ItemsSource)).Where(user => user.Role == "Admin").ToList();
-            }
-
-            sortByFIO();
+            Sort();
         }
 
         private void Admin_CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            UsersView.ItemsSource = users.Where(user => user.Role == "Admin").ToList();
-            if (FIO_Input.Text.Length > 0)
-            {
-                UsersView.ItemsSource = ((List<User>)(UsersView.ItemsSource)).Where(user => user.FIO.Contains(FIO_Input.Text)).ToList();
-            }
-
-            sortByFIO();
+            Sort();
         }
 
         private void Admin_CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            UsersView.ItemsSource = users;
-            if (FIO_Input.Text.Length > 0)
-            {
-                UsersView.ItemsSource = ((List<User>)(UsersView.ItemsSource)).Where(user => user.FIO.Contains(FIO_Input.Text)).ToList();
-            }
-
-            sortByFIO();
+            Sort();
         }
 
         private void ClearFilters_Button_Click(object sender, RoutedEventArgs e)
@@ -86,25 +59,36 @@ namespace _222_Emelyanenko
 
         private void SortComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            sortByFIO();
+            Sort();
         }
 
-        private void sortByFIO()
+        private void Sort()
         {
             if (UsersView != null)
             {
-                List<User> sortedCollection = (List<User>)UsersView.ItemsSource;
-                if (((ComboBoxItem)SortComboBox.SelectedItem).Content as string == "ФИО, По убыванию")
+                List<User> usersFiltered = users;
+                if (Admin_CheckBox.IsChecked.GetValueOrDefault())
                 {
-                    sortedCollection.Sort((user1, user2) => user1.FIO.CompareTo(user2.FIO));
-                    sortedCollection.Reverse();
+                    usersFiltered = usersFiltered.Where(user => user.Role == "Admin").ToList();
                 }
-                else if (((ComboBoxItem)SortComboBox.SelectedItem).Content as string == "ФИО, По возрастанию")
+                
+                if (FIO_Input.Text.Length > 0)
                 {
-                    sortedCollection.Sort((user1, user2) => user1.FIO.CompareTo(user2.FIO));
+                    usersFiltered = usersFiltered.Where(user => user.FIO.ToLower().Contains(FIO_Input.Text.ToLower())).ToList();
                 }
+
+                if (SortComboBox.SelectedItem as string == "ФИО, По убыванию")
+                {
+                    usersFiltered.Sort((user1, user2) => user1.FIO.CompareTo(user2.FIO));
+                    usersFiltered.Reverse();
+                }
+                else if (SortComboBox.SelectedItem as string == "ФИО, По возрастанию")
+                {
+                    usersFiltered.Sort((user1, user2) => user1.FIO.CompareTo(user2.FIO));
+                }
+
                 UsersView.ItemsSource = null;
-                UsersView.ItemsSource = sortedCollection;
+                UsersView.ItemsSource = usersFiltered;
             }
         }
     }

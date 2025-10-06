@@ -100,7 +100,7 @@ namespace _222_Emelyanenko
                     MessageBox.Show("Введите логин!");
                     return;
                 }
-                else if (Password_Input.Text.Length == 0)
+                else if (Password_Input.Password.Length == 0)
                 {
                     MessageBox.Show("Введите пароль!");
                     return;
@@ -108,7 +108,7 @@ namespace _222_Emelyanenko
                 else
                 {
                     string login = Login_Input.Text;
-                    string password = GetHash(Password_Input.Text);
+                    string password = GetHash(Password_Input.Password);
                     currentUser = Emelyanenko_DB_PaymentEntities2.getInstance().User.AsNoTracking().FirstOrDefault(user => user.Login == login && user.Password == password);
                     if (currentUser == null)
                     {
@@ -124,10 +124,10 @@ namespace _222_Emelyanenko
                         switch (currentUser.Role)
                         {
                             case "User":
-
+                            NavigationService.Navigate(new UsersPage());
                                 break;
                             case "Admin":
-                            NavigationService.Navigate(new UsersPage());
+                            NavigationService.Navigate(new AdminPage());
                                 break;
                         }
                     }
