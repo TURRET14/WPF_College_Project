@@ -96,42 +96,53 @@ namespace _222_Emelyanenko
                 return;
             }
             if (Login_Input.Text.Length == 0)
+            {
+                MessageBox.Show("Введите логин!");
+                return;
+            }
+            else if (Password_Input.Password.Length == 0)
+            {
+                MessageBox.Show("Введите пароль!");
+                return;
+            }
+            else
+            {
+                string login = Login_Input.Text;
+                string password = GetHash(Password_Input.Password);
+                try
                 {
-                    MessageBox.Show("Введите логин!");
+                    currentUser = Emelyanenko_DB_PaymentEntities2.getInstance().User.AsNoTracking().FirstOrDefault(user => user.Login == login && user.Password == password);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                     return;
                 }
-                else if (Password_Input.Password.Length == 0)
+                if (currentUser == null)
                 {
-                    MessageBox.Show("Введите пароль!");
-                    return;
+                    MessageBox.Show("Логин или пароль неверны!");
+                    failedAttempts++;
+                    if (failedAttempts >= 3)
+                    {
+                        ToggleCaptcha();
+                    }
                 }
                 else
                 {
-                    string login = Login_Input.Text;
-                    string password = GetHash(Password_Input.Password);
-                    currentUser = Emelyanenko_DB_PaymentEntities2.getInstance().User.AsNoTracking().FirstOrDefault(user => user.Login == login && user.Password == password);
-                    if (currentUser == null)
+                    switch (currentUser.Role)
                     {
-                        MessageBox.Show("Логин или пароль неверны!");
-                        failedAttempts++;
-                        if (failedAttempts >= 3)
-                        {
-                            ToggleCaptcha();
-                        }
-                    }
-                    else
-                    {
-                        switch (currentUser.Role)
-                        {
-                            case "User":
-                            NavigationService.Navigate(new UsersPage());
-                                break;
-                            case "Admin":
+                        case "User":
+                            NavigationService.Navigate(new GuestHomePage());
+                            break;
+                        case "Admin":
                             NavigationService.Navigate(new AdminPage());
-                                break;
-                        }
+                            break;
+                        default:
+                            MessageBox.Show("У пользователя нет роли! Вход в систему невозможен.");
+                            break;
                     }
                 }
+            }
 
         }
 

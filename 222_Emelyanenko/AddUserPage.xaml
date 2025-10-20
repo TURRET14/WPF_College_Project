@@ -17,12 +17,13 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontWeight="Bold">Добавить пользователя</Label>
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontWeight="Bold">Пользователь</Label>
         <Label Grid.Column="0" Grid.Row="1">Логин</Label>
         <TextBox Grid.Column="1" Grid.Row="1" Name="Login_Input" Text="{Binding Login}"></TextBox>
 
@@ -38,6 +39,9 @@
             <sys:String>Admin</sys:String>
         </ComboBox>
 
-        <Button Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Name="SaveButton" Click="SaveButton_Click">Сохранить</Button>
+        <Label Grid.Column="0" Grid.Row="5">Путь к фотографии</Label>
+        <TextBox Grid.Column="1" Grid.Row="5" Name="Photo_Input" Text="{Binding Photo}"></TextBox>
+
+        <Button Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Name="SaveButton" Click="SaveButton_Click">Сохранить</Button>
     </Grid>
 </Page>

@@ -16,66 +16,43 @@ using System.Windows.Shapes;
 
 namespace _222_Emelyanenko
 {
-    /// <summary>
-    /// Логика взаимодействия для AddUserPage.xaml
-    /// </summary>
-    public partial class AddUserPage : Page
+    public partial class AddCategoryPage : Page
     {
-        User currentUser;
-        bool isNewUser = false;
-        public AddUserPage(User selectedUser)
+        Category currentCategory;
+        bool isNewCategory = false;
+        public AddCategoryPage(Category selectedCategory)
         {
             InitializeComponent();
-            if (selectedUser != null)
+            if (selectedCategory != null)
             {
-                selectedUser.Password = "";
-                currentUser = selectedUser;
+                currentCategory = selectedCategory;
             }
             else
             {
-                currentUser = new User();
-                isNewUser = true;
+                currentCategory = new Category();
+                isNewCategory = true;
             }
-            DataContext = currentUser;
-        }
-
-        public static string GetHash(string password)
-        {
-            SHA1 hash = SHA1.Create();
-            return string.Concat(hash.ComputeHash(Encoding.UTF8.GetBytes(password)).Select(x => x.ToString("X2")));
+            DataContext = currentCategory;
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
-            if (Login_Input.Text.Length == 0)
+            if (Name_Input.Text.Length == 0)
             {
-                errors.AppendLine("Введите логин!");
-            }
-            if (Password_Input.Text.Length == 0)
-            {
-                errors.AppendLine("Введите пароль!");
-            }
-            if (FIO_Input.Text.Length == 0)
-            {
-                errors.AppendLine("Введите ФИО!");
-            }
-            if (Role_Input.SelectedItem == null)
-            {
-                errors.AppendLine("Выберите роль!");
+                errors.AppendLine("Введите название!");
             }
             if (errors.Length > 0)
             {
                 MessageBox.Show(errors.ToString());
                 return;
             }
-            currentUser.Password = GetHash(Password_Input.Text);
-            if (isNewUser)
+            if (isNewCategory)
             {
                 try
                 {
-                    Emelyanenko_DB_PaymentEntities2.getInstance().User.Add(currentUser);
-                    MessageBox.Show("Пользователь добавлен!");
+                    Emelyanenko_DB_PaymentEntities2.getInstance().Category.Add(currentCategory);
+                    MessageBox.Show("Категория добавлена!");
                 }
                 catch (Exception ex)
                 {
@@ -86,7 +63,7 @@ namespace _222_Emelyanenko
             try
             {
                 Emelyanenko_DB_PaymentEntities2.getInstance().SaveChanges();
-                if (!isNewUser)
+                if (!isNewCategory)
                 {
                     MessageBox.Show("Изменения сохранены!");
                 }

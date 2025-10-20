@@ -92,7 +92,15 @@ namespace _222_Emelyanenko
                 string login = Login_Input.Text;
                 string oldPassword = GetHash(OldPassword_Input.Password);
                 string newPassword = GetHash(NewPassword_Input.Password);
-                currentUser = Emelyanenko_DB_PaymentEntities2.getInstance().User.FirstOrDefault(user => user.Login == login && user.Password == oldPassword);
+                try
+                {
+                    currentUser = Emelyanenko_DB_PaymentEntities2.getInstance().User.FirstOrDefault(user => user.Login == login && user.Password == oldPassword);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
                 if (currentUser == null)
                 {
                     MessageBox.Show("Логин или пароль неверны!");
@@ -100,7 +108,15 @@ namespace _222_Emelyanenko
                 else
                 {
                     currentUser.Password = newPassword;
-                    Emelyanenko_DB_PaymentEntities2.getInstance().SaveChanges();
+                    try
+                    {
+                        Emelyanenko_DB_PaymentEntities2.getInstance().SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                        return;
+                    }
                     MessageBox.Show("Пароль успешно изменен!");
                     NavigationService.Navigate(new AuthPage());
                 }

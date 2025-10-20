@@ -101,17 +101,23 @@ namespace _222_Emelyanenko
                 string password = GetHash(Password_Input.Text);
                 string fio = FIO_Input.Text;
                 string role = Role_Input.Text;
-
-                if (Emelyanenko_DB_PaymentEntities2.getInstance().User.FirstOrDefault(user => user.Login == login) != null)
+                try
                 {
-                    MessageBox.Show("Логин уже занят!");
+                    if (Emelyanenko_DB_PaymentEntities2.getInstance().User.FirstOrDefault(user => user.Login == login) != null)
+                    {
+                        MessageBox.Show("Логин уже занят!");
+                    }
+                    else
+                    {
+                        Emelyanenko_DB_PaymentEntities2.getInstance().User.Add(new User() { Login = login, Password = password, FIO = fio, Role = role });
+                        Emelyanenko_DB_PaymentEntities2.getInstance().SaveChanges();
+                        MessageBox.Show("Вы успешно зарегистрировались!");
+                        NavigationService.Navigate(new AuthPage());
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    Emelyanenko_DB_PaymentEntities2.getInstance().User.Add(new User() { Login = login, Password = password, FIO = fio, Role = role });
-                    Emelyanenko_DB_PaymentEntities2.getInstance().SaveChanges();
-                    MessageBox.Show("Вы успешно зарегистрировались!");
-                    NavigationService.Navigate(new AuthPage());
+                    MessageBox.Show(ex.Message);
                 }
             }
         }

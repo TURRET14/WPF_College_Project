@@ -1,4 +1,4 @@
-﻿<Page x:Class="_222_Emelyanenko.UsersPage"
+﻿<Page x:Class="_222_Emelyanenko.PaymentsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -17,7 +17,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" FontWeight="Bold">Пользователи</Label>
+        <Label Grid.Row="0" FontWeight="Bold">Платежи</Label>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -27,17 +27,16 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0">ФИО</Label>
-            <TextBox Grid.Column="1" Name="FIO_Input" TextChanged="FIO_Input_TextChanged"></TextBox>
-            <CheckBox Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Name="Admin_CheckBox" Checked="Admin_CheckBox_Checked" Unchecked="Admin_CheckBox_Unchecked">Только администраторы</CheckBox>
+            <Label Grid.Column="0">Название</Label>
+            <TextBox Grid.Column="1" Name="Name_Input" TextChanged="Name_Input_TextChanged"></TextBox>
             <Label Grid.Column="3">Сортировка</Label>
             <ComboBox Grid.Column="4" Name="SortComboBox" SelectedIndex="0" SelectionChanged="SortComboBox_SelectionChanged">
-                <sys:String>ФИО, По возрастанию</sys:String>
-                <sys:String>ФИО, По убыванию</sys:String>
+                <sys:String>Название, По возрастанию</sys:String>
+                <sys:String>Название, По убыванию</sys:String>
             </ComboBox>
             <Button Grid.Column="5" Name="ClearFilters_Button" Click="ClearFilters_Button_Click">Очистить фильтры</Button>
         </Grid>
-        <ListView Grid.Row="2" Name="UsersView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListView Grid.Row="2" Name="PaymentsView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -52,32 +51,31 @@
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
-                        <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Stretch="Uniform" Width="50" RenderOptions.BitmapScalingMode="HighQuality">
-                            <Image.Source>
-                                <Binding Path="Photo">
-                                    <Binding.TargetNullValue>
-                                        <ImageSource>/User.png</ImageSource>
-                                    </Binding.TargetNullValue>
-                                    <Binding.FallbackValue>
-                                        <ImageSource>/User.png</ImageSource>
-                                    </Binding.FallbackValue>
-                                </Binding>
-                            </Image.Source>
-                        </Image>
-                        <Label Grid.Row="1" Grid.Column="0">Логин</Label>
-                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Login}" IsReadOnly="True"></TextBox>
+                        <Label Grid.Column="0" Grid.Row="0">Пользователь</Label>
+                        <TextBox Grid.Column="1" Grid.Row="0" Name="User_Input" Text="{Binding User.FIO}" IsReadOnly="True"></TextBox>
 
-                        <Label Grid.Row="2" Grid.Column="0">ФИО</Label>
-                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding FIO}" IsReadOnly="True"></TextBox>
+                        <Label Grid.Column="0" Grid.Row="1">Категория</Label>
+                        <TextBox Grid.Column="1" Grid.Row="1" Name="Category_Input" Text="{Binding Category.Name}" IsReadOnly="True"></TextBox>
 
-                        <Label Grid.Row="3" Grid.Column="0">Роль</Label>
-                        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Role}" IsReadOnly="True"></TextBox>
+                        <Label Grid.Column="0" Grid.Row="2">Дата</Label>
+                        <TextBox Grid.Column="1" Grid.Row="2" Name="Date_Input" Text="{Binding Date}" IsReadOnly="True"></TextBox>
+
+                        <Label Grid.Column="0" Grid.Row="3">Название</Label>
+                        <TextBox Grid.Column="1" Grid.Row="3" Name="Name_Input" Text="{Binding Name}" IsReadOnly="True"></TextBox>
+
+                        <Label Grid.Column="0" Grid.Row="4">Количество</Label>
+                        <TextBox Grid.Column="1" Grid.Row="4" Name="Num_Input" Text="{Binding Num}" IsReadOnly="True"></TextBox>
+
+                        <Label Grid.Column="0" Grid.Row="5">Цена</Label>
+                        <TextBox Grid.Column="1" Grid.Row="5" Name="Price_Input" Text="{Binding Price}" IsReadOnly="True"></TextBox>
 
                     </Grid>
                 </DataTemplate>

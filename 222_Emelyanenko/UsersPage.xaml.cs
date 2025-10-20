@@ -17,23 +17,35 @@ using System.Windows.Shapes;
 
 namespace _222_Emelyanenko
 {
-    /// <summary>
-    /// Логика взаимодействия для UsersPage.xaml
-    /// </summary>
     public partial class UsersPage : Page
     {
         List<User> users;
         public UsersPage()
         {
             InitializeComponent();
-            users = Emelyanenko_DB_PaymentEntities2.getInstance().User.ToList();
+            try
+            {
+                users = Emelyanenko_DB_PaymentEntities2.getInstance().User.ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
             UsersView.ItemsSource = users;
             Sort();
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-            Emelyanenko_DB_PaymentEntities2.getInstance().SaveChanges();
+            try
+            {
+                Emelyanenko_DB_PaymentEntities2.getInstance().SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void FIO_Input_TextChanged(object sender, TextChangedEventArgs e)

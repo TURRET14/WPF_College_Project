@@ -18,26 +18,26 @@ namespace _222_Emelyanenko
     /// <summary>
     /// Логика взаимодействия для AdminPage.xaml
     /// </summary>
-    public partial class AdminPage : Page
+    public partial class GuestHomePage : Page
     {
-        public AdminPage()
+        public GuestHomePage()
         {
             InitializeComponent();
         }
 
         private void UsersTableButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new UsersTabPage());
+            NavigationService.Navigate(new UsersPage());
         }
 
         private void CategoryTableButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new CategoriesTabPage());
+            NavigationService.Navigate(new CategoriesPage());
         }
 
         private void PaymentTableButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new PaymentsTabPage());
+            NavigationService.Navigate(new PaymentsPage());
         }
 
         private void DiagramTableButton_Click(object sender, RoutedEventArgs e)

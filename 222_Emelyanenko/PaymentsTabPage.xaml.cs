@@ -16,16 +16,16 @@ using System.Windows.Shapes;
 namespace _222_Emelyanenko
 {
     /// <summary>
-    /// Логика взаимодействия для UsersTabPage.xaml
+    /// Логика взаимодействия для CategoriesTabPage.xaml
     /// </summary>
-    public partial class UsersTabPage : Page
+    public partial class PaymentsTabPage : Page
     {
-        public UsersTabPage()
+        public PaymentsTabPage()
         {
             InitializeComponent();
             try
             {
-                UsersTable.ItemsSource = Emelyanenko_DB_PaymentEntities2.getInstance().User.ToList();
+                PaymentsTable.ItemsSource = Emelyanenko_DB_PaymentEntities2.getInstance().Payment.ToList();
             }
             catch (Exception ex)
             {
@@ -35,24 +35,24 @@ namespace _222_Emelyanenko
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddUserPage((sender as Button).DataContext as User));
+            NavigationService.Navigate(new AddPaymentPage((sender as Button).DataContext as Payment));
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddUserPage(null));
+            NavigationService.Navigate(new AddPaymentPage(null));
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                List<User> usersForDeletion = UsersTable.SelectedItems.Cast<User>().ToList();
+                List<Payment> usersForDeletion = PaymentsTable.SelectedItems.Cast<Payment>().ToList();
                 if (MessageBox.Show($"Вы уверены, что хотите удалить {usersForDeletion.Count} записей?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    Emelyanenko_DB_PaymentEntities2.getInstance().User.RemoveRange(usersForDeletion);
+                    Emelyanenko_DB_PaymentEntities2.getInstance().Payment.RemoveRange(usersForDeletion);
                     Emelyanenko_DB_PaymentEntities2.getInstance().SaveChanges();
-                    UsersTable.ItemsSource = Emelyanenko_DB_PaymentEntities2.getInstance().User.ToList();
+                    PaymentsTable.ItemsSource = Emelyanenko_DB_PaymentEntities2.getInstance().Payment.ToList();
                 }
             }
             catch (Exception ex)
@@ -64,7 +64,7 @@ namespace _222_Emelyanenko
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            UsersTable.ItemsSource = Emelyanenko_DB_PaymentEntities2.getInstance().User.ToList();
+            PaymentsTable.ItemsSource = Emelyanenko_DB_PaymentEntities2.getInstance().Payment.ToList();
         }
     }
 }
