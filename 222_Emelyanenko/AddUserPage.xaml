@@ -7,7 +7,7 @@
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddUserPage">
+      Title="Пользователь">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -25,13 +25,13 @@
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontWeight="Bold">Пользователь</Label>
         <Label Grid.Column="0" Grid.Row="1">Логин</Label>
-        <TextBox Grid.Column="1" Grid.Row="1" Name="Login_Input" Text="{Binding Login}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="1" Name="Login_Input" Text="{Binding Login}" MaxLength="100"></TextBox>
 
         <Label Grid.Column="0" Grid.Row="2">Пароль</Label>
-        <TextBox Grid.Column="1" Grid.Row="2" Name="Password_Input" Text="{Binding Password}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="2" Name="Password_Input" Text="{Binding Password}" MaxLength="100"></TextBox>
 
         <Label Grid.Column="0" Grid.Row="3">ФИО</Label>
-        <TextBox Grid.Column="1" Grid.Row="3" Name="FIO_Input" Text="{Binding FIO}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="3" Name="FIO_Input" Text="{Binding FIO}" MaxLength="100"></TextBox>
 
         <Label Grid.Column="0" Grid.Row="4">Роль</Label>
         <ComboBox Grid.Column="1" Grid.Row="4" Name="Role_Input" SelectedItem="{Binding Role}">
@@ -40,7 +40,7 @@
         </ComboBox>
 
         <Label Grid.Column="0" Grid.Row="5">Путь к фотографии</Label>
-        <TextBox Grid.Column="1" Grid.Row="5" Name="Photo_Input" Text="{Binding Photo}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="5" Name="Photo_Input" Text="{Binding Photo}" MaxLength="200"></TextBox>
 
         <Button Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Name="SaveButton" Click="SaveButton_Click">Сохранить</Button>
     </Grid>

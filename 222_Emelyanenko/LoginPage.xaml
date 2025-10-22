@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:_222_Emelyanenko"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="LoginPage">
+      Title="Вход">
 
     <Grid VerticalAlignment="Center">
         <Grid.RowDefinitions>

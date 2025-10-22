@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -67,9 +68,45 @@ namespace _222_Emelyanenko
             {
                 errors.AppendLine("Введите количество!");
             }
+            else
+            {
+                try
+                {
+                    if (Convert.ToDecimal(Num_Input.Text) < 0)
+                    {
+                        errors.AppendLine("Количество не может быть отрицательным!");
+                    }
+                    else if (Convert.ToDecimal(Num_Input.Text) > 10000000)
+                    {
+                        errors.AppendLine("Количество слишком большое!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    errors.AppendLine("Введите корректное количество!");
+                }
+            }
             if (Price_Input.Text.Length == 0)
             {
                 errors.AppendLine("Введите цену!");
+            }
+            else
+            {
+                try
+                {
+                    if (Convert.ToDecimal(Price_Input.Text) < 0)
+                    {
+                        errors.AppendLine("Цена не может быть отрицательной!");
+                    }
+                    else if (Convert.ToDecimal(Price_Input.Text) > 10000000)
+                    {
+                        errors.AppendLine("Цена слишком большая!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    errors.AppendLine("Введите корректную цену!");
+                }
             }
             if (errors.Length > 0)
             {
@@ -105,6 +142,15 @@ namespace _222_Emelyanenko
             if (NavigationService.CanGoBack)
             {
                 NavigationService.GoBack();
+            }
+        }
+
+        private void Input_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex(@"^\d*\.?\d*$");
+            if (!regex.IsMatch(e.Text))
+            {
+                e.Handled = true;
             }
         }
     }

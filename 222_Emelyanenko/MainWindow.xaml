@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="ИС Заказы" Height="450" Width="800" Loaded="Window_Loaded" Icon="/Icon.ico" Closing="Window_Closing">
     <Grid>
+        <!--Главная страница приложения-->
         <Grid.RowDefinitions>
             <RowDefinition Height="45"></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -17,10 +18,13 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Click="Back_Button_Click">Назад</Button>
-            <Button Grid.Column="1" Click="Style_Button_Click">Сменить словарь стилей</Button>
+            <!--Навигация-->
+            <Button Grid.Column="0" Click="Back_Button_Click" ToolTip="Вернуться к предыдущей странице">Назад</Button>
+            <Button Grid.Column="1" Click="Style_Button_Click" ToolTip="Сменить словарь стилей">Сменить словарь стилей</Button>
         </Grid>
+        <!--Основной контент-->
         <Frame Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" Source="/AuthPage.xaml"></Frame>
-        <TextBlock Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Name="DateTimeNow"></TextBlock>
+        <!--Дата и время-->
+        <TextBlock Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Name="DateTimeNow" ToolTip="Дата и время"></TextBlock>
     </Grid>
 </Window>

@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:_222_Emelyanenko"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AdminPage">
+      Title="Навигация (Администратор)">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -21,10 +21,11 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Name="UsersTableButton" Click="UsersTableButton_Click">Таблица пользователей</Button>
-            <Button Grid.Column="1" Name="CategoryTableButton" Click="CategoryTableButton_Click">Таблица категорий</Button>
-            <Button Grid.Column="2" Name="PaymentTableButton" Click="PaymentTableButton_Click">Таблица платежей</Button>
-            <Button Grid.Column="3" Name="DiagramTableButton" Click="DiagramTableButton_Click">Диаграммы</Button>
+            <!--Кнопки навигации-->
+            <Button Grid.Column="0" Name="UsersTableButton" Click="UsersTableButton_Click" ToolTip="Перейти к таблице пользователей">Таблица пользователей</Button>
+            <Button Grid.Column="1" Name="CategoryTableButton" Click="CategoryTableButton_Click" ToolTip="Перейти к таблице категорий">Таблица категорий</Button>
+            <Button Grid.Column="2" Name="PaymentTableButton" Click="PaymentTableButton_Click" ToolTip="Перейти к таблице платежей">Таблица платежей</Button>
+            <Button Grid.Column="3" Name="DiagramTableButton" Click="DiagramTableButton_Click" ToolTip="Перейти к странице диаграмм и экспорта в Word и Excel">Диаграммы</Button>
         </Grid>
     </Grid>
 </Page>

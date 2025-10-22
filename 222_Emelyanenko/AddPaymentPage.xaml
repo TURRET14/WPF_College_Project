@@ -7,7 +7,7 @@
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddUserPage">
+      Title="Платеж">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -33,16 +33,16 @@
         <ComboBox Grid.Column="1" Grid.Row="2" Name="Category_Input" SelectedItem="{Binding Category}" DisplayMemberPath="Name"></ComboBox>
 
         <Label Grid.Column="0" Grid.Row="3">Дата</Label>
-        <DatePicker Grid.Column="1" Grid.Row="3" Name="Date_Input" Text="{Binding Date}"></DatePicker>
+        <DatePicker Grid.Column="1" Grid.Row="3" Name="Date_Input" Text="{Binding Date}" SelectedDate="01.01.2025"></DatePicker>
 
         <Label Grid.Column="0" Grid.Row="4">Название</Label>
-        <TextBox Grid.Column="1" Grid.Row="4" Name="Name_Input" Text="{Binding Name}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="4" Name="Name_Input" Text="{Binding Name}" MaxLength="100"></TextBox>
 
         <Label Grid.Column="0" Grid.Row="5">Количество</Label>
-        <TextBox Grid.Column="1" Grid.Row="5" Name="Num_Input" Text="{Binding Num}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="5" Name="Num_Input" Text="{Binding Num, TargetNullValue=''}" PreviewTextInput="Input_PreviewTextInput" MaxLength="10"></TextBox>
 
         <Label Grid.Column="0" Grid.Row="6">Цена</Label>
-        <TextBox Grid.Column="1" Grid.Row="6" Name="Price_Input" Text="{Binding Price}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="6" Name="Price_Input" Text="{Binding Price, TargetNullValue=''}" PreviewTextInput="Input_PreviewTextInput" MaxLength="10"></TextBox>
 
         <Button Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Name="SaveButton" Click="SaveButton_Click">Сохранить</Button>
     </Grid>
