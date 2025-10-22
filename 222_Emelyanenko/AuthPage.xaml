@@ -10,12 +10,14 @@
 
     <Grid VerticalAlignment="Center">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="45"></RowDefinition>
             <RowDefinition Height="45"></RowDefinition>
             <RowDefinition Height="45"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Grid.Row="0" Click="Login_Click">Войти</Button>
-        <Button Grid.Row="1" Click="Register_Click">Зарегистрироваться</Button>
-        <Button Grid.Row="2" Click="ChangePassword_Click">Сменить пароль</Button>
+        <Label Grid.Row="0" FontWeight="Bold">Главная</Label>
+        <Button Grid.Row="1" Click="Login_Click">Войти</Button>
+        <Button Grid.Row="2" Click="Register_Click">Зарегистрироваться</Button>
+        <Button Grid.Row="3" Click="ChangePassword_Click">Сменить пароль</Button>
     </Grid>
 </Page>

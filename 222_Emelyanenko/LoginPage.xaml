@@ -10,6 +10,7 @@
 
     <Grid VerticalAlignment="Center">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="45"></RowDefinition>
             <RowDefinition Height="45"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -20,16 +21,18 @@
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
-        <Label Grid.Column="0" Grid.Row="0">Логин</Label>
-        <TextBox Grid.Column="1" Grid.Row="0" Name="Login_Input"></TextBox>
-        
-        <Label Grid.Column="0" Grid.Row="1">Пароль</Label>
-        <PasswordBox Grid.Column="1" Grid.Row="1" Name="Password_Input"></PasswordBox>
 
-        <Label Grid.Row="2" Grid.Column="0" Name="CaptchaLabel" Visibility="Collapsed" Height="35">Captcha</Label>
-        <TextBox Grid.Row="2" Grid.Column="1" Name="CaptchaText" IsReadOnly="True" Visibility="Collapsed" Height="35" FontWeight="Bold" CommandManager.PreviewExecuted="CaptchaText_PreviewExecuted"></TextBox>
-        <Grid Grid.Row="3" Grid.ColumnSpan="2" Name="CaptchaGrid" Visibility="Collapsed" Height="45">
+        <Label Grid.Row="0" FontWeight="Bold">Вход</Label>
+
+        <Label Grid.Column="0" Grid.Row="1">Логин</Label>
+        <TextBox Grid.Column="1" Grid.Row="1" Name="Login_Input"></TextBox>
+        
+        <Label Grid.Column="0" Grid.Row="2">Пароль</Label>
+        <PasswordBox Grid.Column="1" Grid.Row="2" Name="Password_Input"></PasswordBox>
+
+        <Label Grid.Row="3" Grid.Column="0" Name="CaptchaLabel" Visibility="Collapsed" Height="35">Captcha</Label>
+        <TextBox Grid.Row="3" Grid.Column="1" Name="CaptchaText" IsReadOnly="True" Visibility="Collapsed" Height="35" FontWeight="Bold" CommandManager.PreviewExecuted="CaptchaText_PreviewExecuted"></TextBox>
+        <Grid Grid.Row="4" Grid.ColumnSpan="2" Name="CaptchaGrid" Visibility="Collapsed" Height="45">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -37,6 +40,6 @@
             <TextBox Grid.Column="0" Name="CaptchaInput"></TextBox>
             <Button Grid.Column="1" Name="CaptchaValidate" Click="CaptchaValidate_Click">Проверить</Button>
         </Grid>
-        <Button Grid.Row="4" Grid.ColumnSpan="2" Click="Login_Click">Войти</Button>
+        <Button Grid.Row="5" Grid.ColumnSpan="2" Click="Login_Click">Войти</Button>
     </Grid>
 </Page>

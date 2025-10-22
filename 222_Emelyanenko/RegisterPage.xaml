@@ -10,6 +10,7 @@
 
     <Grid VerticalAlignment="Center">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="45"></RowDefinition>
             <RowDefinition Height="45"></RowDefinition>
             <RowDefinition Height="45"></RowDefinition>
@@ -22,24 +23,26 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Column="0" Grid.Row="0">Логин</Label>
-        <TextBox Grid.Column="1" Grid.Row="0" Name="Login_Input"></TextBox>
+        <Label Grid.Row="0" FontWeight="Bold">Регистрация</Label>
+        
+        <Label Grid.Column="0" Grid.Row="1">Логин</Label>
+        <TextBox Grid.Column="1" Grid.Row="1" Name="Login_Input"></TextBox>
 
-        <Label Grid.Column="0" Grid.Row="1">Пароль</Label>
-        <TextBox Grid.Column="1" Grid.Row="1" Name="Password_Input"></TextBox>
+        <Label Grid.Column="0" Grid.Row="2">Пароль</Label>
+        <TextBox Grid.Column="1" Grid.Row="2" Name="Password_Input"></TextBox>
 
-        <Label Grid.Column="0" Grid.Row="2">Повторите пароль</Label>
-        <TextBox Grid.Column="1" Grid.Row="2" Name="PasswordRepeat_Input"></TextBox>
+        <Label Grid.Column="0" Grid.Row="3">Повторите пароль</Label>
+        <TextBox Grid.Column="1" Grid.Row="3" Name="PasswordRepeat_Input"></TextBox>
 
-        <Label Grid.Column="0" Grid.Row="3">ФИО</Label>
-        <TextBox Grid.Column="1" Grid.Row="3" Name="FIO_Input"></TextBox>
+        <Label Grid.Column="0" Grid.Row="4">ФИО</Label>
+        <TextBox Grid.Column="1" Grid.Row="4" Name="FIO_Input"></TextBox>
 
-        <Label Grid.Column="0" Grid.Row="4">Роль</Label>
-        <ComboBox Grid.Column="1" Grid.Row="4" Name="Role_Input" SelectedIndex="0">
+        <Label Grid.Column="0" Grid.Row="5">Роль</Label>
+        <ComboBox Grid.Column="1" Grid.Row="5" Name="Role_Input" SelectedIndex="0">
             <ComboBoxItem>User</ComboBoxItem>
             <ComboBoxItem>Admin</ComboBoxItem>
         </ComboBox>
 
-        <Button Grid.Row="5" Grid.ColumnSpan="2" Click="RegisterButton_Click">Зарегистрироваться</Button>
+        <Button Grid.Row="6" Grid.ColumnSpan="2" Click="RegisterButton_Click">Зарегистрироваться</Button>
     </Grid>
 </Page>

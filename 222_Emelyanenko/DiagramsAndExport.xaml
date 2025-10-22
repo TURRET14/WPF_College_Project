@@ -12,9 +12,11 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Label Grid.Row="0" FontWeight="Bold">Диаграммы и экспорт</Label>
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -32,7 +34,7 @@
             <Button Grid.Column="4" Click="WordExport">Экспорт в Word</Button>
             <Button Grid.Column="5" Click="ExcelExport">Экспорт в Excel</Button>
         </Grid>
-        <WindowsFormsHost Grid.Row="1">
+        <WindowsFormsHost Grid.Row="2">
             <charts:Chart x:Name="ChartPayments">
                 <charts:Chart.Legends>
                     <charts:Legend>
